@@ -1,19 +1,36 @@
 package org.sourceit.zakharov.home05;
 
+import java.util.Scanner;
+
 public class Task01 {
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
         Auto[] auto = {new Auto("1type", 1992, "red"),
                         new Auto("2type", 1998, "red"),
                         new Auto("3type", 2004, "red"),
                         new Auto("1type", 1998, "blue"),
                         new Auto("2type", 2000, "red")};
 
+        for (int i = 0; i < auto.length; i++) {
+            System.out.println(auto[i].toString());
+        }
 
+        while (true) {
+            System.out.println("enter two number for comparison, or 0 fr escape");
+            int s1 = scanner.nextInt();
+            if (s1 ==0) break;
+            int s2 = scanner.nextInt();
 
-        System.out.println(auto[1].equals(auto[1]));
-        System.out.println(auto[1].compareTo(auto[4]));
+            if (s1 > auto.length || s2 > auto.length || s1 < 0 || s2 < 0) {
+                System.out.println("incorrectly value");
+                continue;
+            }
 
+            System.out.println(auto[s1].equals(auto[s2]));
+            System.out.println(auto[s1].compareTo(auto[s2]));
+        }
 
 
     }
