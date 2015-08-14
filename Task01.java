@@ -28,15 +28,17 @@ public class Task01 {
                 continue;
             }
 
-            System.out.println(auto[s1].equals(auto[s2]));
-            System.out.println(auto[s1].compareTo(auto[s2]));
+            System.out.println("equals - " + auto[s1].equals(auto[s2]));
+            System.out.println("compareTo - " + auto[s1].compareTo(auto[s2]));
+            System.out.println("hach code - " + auto[s1].hashCode());
+            System.out.println("hach code - " + auto[s2].hashCode());
         }
 
 
     }
 }
-
-class Auto {
+// имплемент компарабле
+class Auto implements Comparable{
     private String type;
     private int year;
     private String color;
@@ -79,10 +81,19 @@ class Auto {
 
 
 
-
+// изменить вычеслтиетль
     @Override
     public int hashCode() {
-        return getYear();
+        int hashType=0 ,hashColor=0;
+
+        for (int i = 0; i < getType().length() && i < getColor().length(); i++){
+            hashType  = 31 * hashType  + getType().charAt(i);
+            hashColor = 31 * hashColor + getColor().charAt(i);
+        }
+//        for (int i = 0; i<getColor().length(); i++){
+//            hashColor=31 * hashColor + getColor().charAt(i);
+//        }
+        return getYear()+hashColor+hashType;
     }
 
     @Override
@@ -94,11 +105,11 @@ class Auto {
         if (getClass() != obj.getClass())
             return false;
         Auto other = (Auto) obj;
-        if (getColor() != other.getColor())
+        if (getColor().compareTo(other.getColor())!=0)
             return false;
         if (getYear() != other.getYear())
             return false;
-        if (getType() != other.getType())
+        if (getType().compareTo(other.getType()) != 0)
             return false;
         return true;
     }
