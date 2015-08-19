@@ -37,7 +37,7 @@ public class Task01 {
 
     }
 }
-// имплемент компарабле
+
 class Auto implements Comparable{
     private String type;
     private int year;
@@ -90,9 +90,7 @@ class Auto implements Comparable{
             hashType  = 31 * hashType  + getType().charAt(i);
             hashColor = 31 * hashColor + getColor().charAt(i);
         }
-//        for (int i = 0; i<getColor().length(); i++){
-//            hashColor=31 * hashColor + getColor().charAt(i);
-//        }
+
         return getYear()+hashColor+hashType;
     }
 
@@ -114,7 +112,9 @@ class Auto implements Comparable{
         return true;
     }
 
+    @Override
     public int compareTo(Object obj) {
+
         Auto other = (Auto) obj;
         if (this == obj)
             return 0;
@@ -128,7 +128,7 @@ class Auto implements Comparable{
         if (getType().compareTo(other.getType()) > 0 )
             return 9;
         else return -9;
-
     }
 
 }
+
