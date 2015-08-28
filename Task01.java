@@ -8,37 +8,42 @@ public class Task01 {
         Scanner scanner = new Scanner(System.in);
 
         Auto[] auto = {new Auto("1type", 1992, "red"),
-                        new Auto("2type", 1998, "red"),
-                        new Auto("3type", 2004, "red"),
-                        new Auto("1type", 1998, "blue"),
-                        new Auto("2type", 2000, "red")};
+                new Auto("2type", 1998, "red"),
+                new Auto("3type", 2004, "red"),
+                new Auto("1type", 1998, "blue"),
+                new Auto("2type", 2000, "red")};
 
         for (int i = 0; i < auto.length; i++) {
-            System.out.println(auto[i].toString());
+            System.out.println(i + " " + auto[i].toString());
         }
 
+        M1:
         while (true) {
-            System.out.println("enter two number for comparison, or 0 fr escape");
+            System.out.println("enter two number for comparison, or -5 fr escape");
             int s1 = scanner.nextInt();
-            if (s1 ==0) break;
+            if (s1 == -5) break;
             int s2 = scanner.nextInt();
 
-            if (s1 > auto.length || s2 > auto.length || s1 < 0 || s2 < 0) {
+            if (s1 >= auto.length || s2 >= auto.length || s1 < 0 || s2 < 0) {
                 System.out.println("incorrectly value");
                 continue;
             }
 
             System.out.println("equals - " + auto[s1].equals(auto[s2]));
             System.out.println("compareTo - " + auto[s1].compareTo(auto[s2]));
+
             System.out.println("hach code - " + auto[s1].hashCode());
             System.out.println("hach code - " + auto[s2].hashCode());
+
+            System.out.println(auto[s1].toString());
+            System.out.println(auto[s2].toString());
         }
 
 
     }
 }
 
-class Auto implements Comparable{
+class Auto implements Comparable {
     private String type;
     private int year;
     private String color;
@@ -79,19 +84,18 @@ class Auto implements Comparable{
     }
 
 
-
-
-// изменить вычеслтиетль
+    // изменить вычеслтиетль
     @Override
     public int hashCode() {
-        int hashType=0 ,hashColor=0;
+        int result = 17;
 
-        for (int i = 0; i < getType().length() && i < getColor().length(); i++){
-            hashType  = 31 * hashType  + getType().charAt(i);
-            hashColor = 31 * hashColor + getColor().charAt(i);
+        for (int i = 0; i < getType().length() && i < getColor().length(); i++) {
+            result = 31 * result + getType().charAt(i);
+            result = 31 * result + getColor().charAt(i);
+            result = 31 * result + getYear();
         }
 
-        return getYear()+hashColor+hashType;
+        return result;
     }
 
     @Override
@@ -103,7 +107,7 @@ class Auto implements Comparable{
         if (getClass() != obj.getClass())
             return false;
         Auto other = (Auto) obj;
-        if (getColor().compareTo(other.getColor())!=0)
+        if (getColor().compareTo(other.getColor()) != 0)
             return false;
         if (getYear() != other.getYear())
             return false;
@@ -119,13 +123,13 @@ class Auto implements Comparable{
         if (this == obj)
             return 0;
 
-        if (getColor().compareTo(other.getColor()) > 0 )
+        if (getColor().compareTo(other.getColor()) > 0)
             return 5;
 
         if (getYear() > other.getYear())
             return 7;
 
-        if (getType().compareTo(other.getType()) > 0 )
+        if (getType().compareTo(other.getType()) > 0)
             return 9;
         else return -9;
     }
