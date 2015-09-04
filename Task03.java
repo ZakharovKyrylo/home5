@@ -276,7 +276,7 @@ class MapToIntString{
 
 class MapToStringString{
     String[] massString;
-    String[] massString1;
+    String[] massString1;//
 
     public MapToStringString(Map map){
         String[] mass = new String[map.size()/2];
